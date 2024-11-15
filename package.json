@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@penpot/plugin-styles": "1.0.0",
-    "@penpot/plugin-types": "1.0.0"
+    "@penpot/plugin-types": "1.0.0",
+    "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
     "typescript": "^5.2.2",

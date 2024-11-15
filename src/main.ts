@@ -1,3 +1,4 @@
+import { createNoise2D } from "simplex-noise";
 import "./style.css";
 
 // get the current theme from the URL
@@ -35,8 +36,8 @@ const scaleValue = document.getElementById("scale-value")!;
 const intensityValue = document.getElementById("intensity-value")!;
 const pixelStepValue = document.getElementById("pixel-step-value")!;
 
-noiseType.onselect = () => {
-  // noiseType.textContent = "abc";
+noiseType.onchange = () => {
+  generateNoise();
 };
 
 // Update displayed scale and intensity values
@@ -71,7 +72,13 @@ function generateNoise() {
   const intensity = parseFloat(intensityInput.value);
   const pixelStep = parseInt(pixelStepInput.value);
 
-  generateWhiteNoise(width, height, scale, intensity, pixelStep);
+  if (noiseType.value === "white") {
+    return generateWhiteNoise(width, height, scale, intensity, pixelStep);
+  }
+
+  if (noiseType.value === "perlin") {
+    return generatePerlinNoise();
+  }
 }
 
 function generateWhiteNoise(
@@ -100,3 +107,31 @@ function generateWhiteNoise(
 
 // Initial generation
 generateNoise();
+
+function generatePerlinNoise() {
+  const width = parseInt(widthInput.value);
+  const height = parseInt(heightInput.value);
+  const scale = parseFloat(scaleInput.value);
+  const intensity = parseFloat(intensityInput.value);
+  const pixelStep = parseInt(pixelStepInput.value);
+  const noise2D = createNoise2D();
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const imageData = ctx.createImageData(width, height);
+
+  for (let x = 0; x < width; x += pixelStep) {
+    for (let y = 0; y < height; y += pixelStep) {
+      // Generate Perlin noise value, scaled by the `scale` factor
+      const value = (noise2D(x / scale, y / scale) + 1) * (intensity / 2); // Scale noise to 0-255 range
+      const index = (x + y * width) * 4;
+      imageData.data[index] = value; // Red
+      imageData.data[index + 1] = value; // Green
+      imageData.data[index + 2] = value; // Blue
+      imageData.data[index + 3] = 255; // Alpha
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
