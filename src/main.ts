@@ -79,6 +79,10 @@ function generateNoise() {
   if (noiseType.value === "perlin") {
     return generatePerlinNoise();
   }
+
+  if (noiseType.value === "gradient") {
+    return generateGradientNoise();
+  }
 }
 
 function generateWhiteNoise(
@@ -125,6 +129,37 @@ function generatePerlinNoise() {
     for (let y = 0; y < height; y += pixelStep) {
       // Generate Perlin noise value, scaled by the `scale` factor
       const value = (noise2D(x / scale, y / scale) + 1) * (intensity / 2); // Scale noise to 0-255 range
+      const index = (x + y * width) * 4;
+      imageData.data[index] = value; // Red
+      imageData.data[index + 1] = value; // Green
+      imageData.data[index + 2] = value; // Blue
+      imageData.data[index + 3] = 255; // Alpha
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
+
+function generateGradientNoise() {
+  const width = parseInt(widthInput.value);
+  const height = parseInt(heightInput.value);
+  const scale = parseFloat(scaleInput.value);
+  const intensity = parseFloat(intensityInput.value);
+  const pixelStep = parseFloat(pixelStepInput.value);
+
+  const noise2D = createNoise2D();
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const imageData = ctx.createImageData(width, height);
+
+  for (let x = 0; x < width; x += pixelStep) {
+    for (let y = 0; y < height; y += pixelStep) {
+      // Generate gradient noise by blending two noise values
+      const gradientX = noise2D(x / scale, 0);
+      const gradientY = noise2D(0, y / scale);
+      const value = (gradientX + gradientY + 1) * (intensity / 2); // Scale noise to 0-255 range
       const index = (x + y * width) * 4;
       imageData.data[index] = value; // Red
       imageData.data[index + 1] = value; // Green
