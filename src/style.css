@@ -33,6 +33,10 @@ input:focus {
   outline: 1px solid var(--da-primary);
 }
 
+input[type="color"] {
+  padding: 2px 4px;
+}
+
 .value-span {
   margin-left: 4px;
   color: var(--df-primary);
@@ -47,6 +51,7 @@ input:focus {
 .canvas-container {
   overflow: hidden;
   aspect-ratio: 1;
+  max-height: 260px;
   width: 100%;
   display: flex;
   justify-content: center;

@@ -6,15 +6,7 @@
     <title>Noisyy - The noise generator for Penpot</title>
   </head>
   <body>
-    <!-- <p>Generate Noise</p>
-
-    <button type="button" data-appearance="primary" data-handler="create-text">
-      Create text
-    </button> -->
-
     <div class="controls">
-      <!-- <h2>Noise Generator</h2> -->
-
       <div class="canvas-container">
         <canvas id="noiseCanvas" width="256" height="256"></canvas>
       </div>
@@ -55,13 +47,20 @@
 
       <div class="form-group">
         <label for="pixel-step">
-          Pixel Step:
+          Pixel Steps:
           <span id="pixel-step-value" class="value-span">4</span>
         </label>
         <input type="range" id="pixel-step" min="1" max="255" value="4" />
       </div>
 
-      <button id="generate" data-appearance="primary">Generate Noise</button>
+      <button
+        id="generate"
+        data-appearance="primary"
+        data-handler="generate-noise"
+        type="submit"
+      >
+        Generate Noise
+      </button>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

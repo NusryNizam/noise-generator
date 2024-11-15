@@ -5,12 +5,24 @@ import "./style.css";
 const searchParams = new URLSearchParams(window.location.search);
 document.body.dataset.theme = searchParams.get("theme") ?? "light";
 
-document
-  .querySelector("[data-handler='create-text']")
-  ?.addEventListener("click", () => {
-    // send message to plugin.ts
-    parent.postMessage("create-text", "*");
-  });
+const generateButton = document.getElementById("generate");
+
+generateButton?.addEventListener("click", () => {
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    // Get the image data as a Uint8Array
+    const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height).data;
+    const uint8Array = new Uint8Array(imageData.buffer);
+
+    parent.postMessage(
+      {
+        type: "generate-noise",
+        data: uint8Array,
+      },
+      "*"
+    );
+  }
+});
 
 // Listen plugin.ts messages
 window.addEventListener("message", (event) => {
@@ -169,4 +181,10 @@ function generateGradientNoise() {
   }
 
   ctx.putImageData(imageData, 0, 0);
+}
+
+function getData() {
+  fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 }

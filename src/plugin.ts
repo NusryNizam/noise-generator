@@ -3,8 +3,11 @@ penpot.ui.open("Noisyy", `?theme=${penpot.theme}`, {
   height: 800,
 });
 
-penpot.ui.onMessage<string>((message) => {
-  if (message === "create-text") {
+penpot.ui.onMessage<{
+  type: string;
+  data: any;
+}>((message) => {
+  if (message.type === "create-text") {
     const text = penpot.createText("Hello world!");
 
     if (text) {
@@ -13,6 +16,19 @@ penpot.ui.onMessage<string>((message) => {
 
       penpot.selection = [text];
     }
+  }
+
+  console.log("MESSAGE:", message);
+
+  if (message.type === "generate-noise") {
+    penpot
+      .uploadMediaData("noise-data", message.data, "image/jpeg")
+      .then(() => {
+        console.log("done");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 });
 
