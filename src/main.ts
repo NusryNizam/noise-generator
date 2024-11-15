@@ -182,9 +182,3 @@ function generateGradientNoise() {
 
   ctx.putImageData(imageData, 0, 0);
 }
-
-function getData() {
-  fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-}
