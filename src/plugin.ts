@@ -1,4 +1,7 @@
-penpot.ui.open("Penpot plugin starter template", `?theme=${penpot.theme}`);
+penpot.ui.open("Noisyy", `?theme=${penpot.theme}`, {
+  width: 360,
+  height: 800,
+});
 
 penpot.ui.onMessage<string>((message) => {
   if (message === "create-text") {

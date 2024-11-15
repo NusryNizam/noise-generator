@@ -3,22 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Penpot plugin example</title>
+    <title>Noisyy - The noise generator for Penpot</title>
   </head>
   <body>
-    <p>Penpot plugin starter template</p>
-
-    <p>
-      Checkout the
-      <a target="_blank" href="https://help.penpot.app/plugins/"
-        >documentation</a
-      >
-      to get started.
-    </p>
+    <!-- <p>Generate Noise</p>
 
     <button type="button" data-appearance="primary" data-handler="create-text">
       Create text
-    </button>
+    </button> -->
+
+    <div class="controls">
+      <!-- <h2>Noise Generator</h2> -->
+
+      <div class="canvas-container">
+        <canvas id="noiseCanvas" width="256" height="256"></canvas>
+      </div>
+
+      <div class="form-group">
+        <label for="gradient-type-select">Gradient Type</label>
+        <select class="select" id="gradient-type-select">
+          <option value="white">White Noise</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label> Width (px) </label>
+        <input type="number" id="width" value="256" min="1" />
+      </div>
+
+      <div class="form-group">
+        <label for="height"> Height (px) </label>
+        <input type="number" id="height" value="256" min="1" />
+      </div>
+
+      <div class="form-group">
+        <label for="scale">
+          Scale: <span id="scale-value" class="value-span">50</span>
+        </label>
+        <input type="range" id="scale" min="1" max="100" value="50" />
+      </div>
+
+      <div class="form-group">
+        <label for="intensity">
+          Intensity:
+          <span id="intensity-value" class="value-span">128</span>
+        </label>
+        <input type="range" id="intensity" min="1" max="255" value="128" />
+      </div>
+
+      <div class="form-group">
+        <label for="pixel-step">
+          Pixel Step:
+          <span id="pixel-step-value" class="value-span">4</span>
+        </label>
+        <input type="range" id="pixel-step" min="1" max="255" value="4" />
+      </div>
+
+      <button id="generate" data-appearance="primary">Generate Noise</button>
+    </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -1,6 +1,12 @@
 {
-  "name": "Penpot starter plugin",
+  "name": "Noisyy",
   "code": "plugin.js",
-  "description": "This is a starter plugin for Penpot",
-  "permissions": ["content:read", "content:write"]
+  "description": "Generate noise inside Penpot",
+  "permissions": [
+    "content:read",
+    "content:write",
+    "page:read",
+    "file:read",
+    "selection:read"
+  ]
 }

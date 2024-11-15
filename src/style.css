@@ -12,3 +12,48 @@ body {
 p {
   margin-block-end: 0.75rem;
 }
+
+label {
+  font-size: 11px;
+  display: block;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--df-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+select,
+input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  accent-color: var(--da-primary);
+}
+
+input:focus {
+  outline: 1px solid var(--da-primary);
+}
+
+.value-span {
+  margin-left: 4px;
+  color: var(--df-primary);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.canvas-container {
+  overflow: hidden;
+  aspect-ratio: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
