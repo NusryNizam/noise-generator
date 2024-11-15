@@ -7,6 +7,8 @@ body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   padding: 10px;
+  max-width: 360px;
+  margin: auto;
 }
 
 p {
