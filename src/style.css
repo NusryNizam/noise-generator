@@ -20,7 +20,6 @@ label {
   display: block;
   font-weight: 500;
   line-height: 18px;
-  color: var(--df-secondary);
   margin-bottom: var(--spacing-4);
 }
 
@@ -28,11 +27,6 @@ select,
 input {
   padding: 0.5rem;
   border-radius: 0.25rem;
-  accent-color: var(--da-primary);
-}
-
-input:focus {
-  outline: 1px solid var(--da-primary);
 }
 
 input[type="color"] {
@@ -102,4 +96,11 @@ body[data-theme="light"] .loader {
   100% {
     rotate: 360deg;
   }
+}
+
+[data-theme="light"] .range {
+  accent-color: var(--la-primary);
+}
+[data-theme="dark"] .range {
+  accent-color: var(--da-primary);
 }

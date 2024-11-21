@@ -23,19 +23,40 @@
 
       <div class="form-group">
         <label> Width (px) </label>
-        <input type="number" id="width" value="256" min="1" />
+        <input
+          class="input"
+          type="number"
+          id="width"
+          value="256"
+          min="1"
+          max="2000"
+        />
       </div>
 
       <div class="form-group">
         <label for="height"> Height (px) </label>
-        <input type="number" id="height" value="256" min="1" />
+        <input
+          class="input"
+          type="number"
+          id="height"
+          value="256"
+          min="1"
+          max="2000"
+        />
       </div>
 
       <div class="form-group">
         <label for="scale">
           Scale: <span id="scale-value" class="value-span">50</span>
         </label>
-        <input type="range" id="scale" min="1" max="100" value="50" />
+        <input
+          class="input range"
+          type="range"
+          id="scale"
+          min="1"
+          max="100"
+          value="50"
+        />
       </div>
 
       <div class="form-group">
@@ -43,7 +64,14 @@
           Intensity:
           <span id="intensity-value" class="value-span">128</span>
         </label>
-        <input type="range" id="intensity" min="1" max="255" value="128" />
+        <input
+          class="range"
+          type="range"
+          id="intensity"
+          min="1"
+          max="255"
+          value="128"
+        />
       </div>
 
       <div class="form-group">
@@ -51,7 +79,14 @@
           Pixel Steps:
           <span id="pixel-step-value" class="value-span">4</span>
         </label>
-        <input type="range" id="pixel-step" min="1" max="255" value="4" />
+        <input
+          class="range"
+          type="range"
+          id="pixel-step"
+          min="1"
+          max="255"
+          value="4"
+        />
       </div>
 
       <button
