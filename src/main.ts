@@ -5,22 +5,37 @@ import "./style.css";
 const searchParams = new URLSearchParams(window.location.search);
 document.body.dataset.theme = searchParams.get("theme") ?? "light";
 
-const generateButton = document.getElementById("generate");
+const generateButton = document.getElementById("generate") as HTMLButtonElement;
+const loaderEl = document.getElementById("loader") as HTMLElement;
+const btnText = document.getElementById("button-text") as HTMLElement;
 
 generateButton?.addEventListener("click", () => {
   const ctx = canvas.getContext("2d");
   if (ctx) {
-    // Get the image data as a Uint8Array
-    const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height).data;
-    const uint8Array = new Uint8Array(imageData.buffer);
+    generateButton.setAttribute("disabled", "true");
+    btnText.textContent = "";
+    loaderEl.classList.toggle("hide");
 
-    parent.postMessage(
-      {
-        type: "generate-noise",
-        data: uint8Array,
-      },
-      "*"
-    );
+    canvas.toBlob(async (blob) => {
+      if (blob) {
+        const buffer = await blob.arrayBuffer();
+        parent.postMessage(
+          {
+            type: "generate-noise",
+            data: {
+              buffer: new Uint8Array(buffer),
+              width: canvas.width,
+              height: canvas.height,
+            },
+          },
+          "*"
+        );
+
+        return;
+      }
+
+      console.info("Error: Couldn't convert to blob.");
+    });
   }
 });
 
@@ -28,6 +43,12 @@ generateButton?.addEventListener("click", () => {
 window.addEventListener("message", (event) => {
   if (event.data.source === "penpot") {
     document.body.dataset.theme = event.data.theme;
+  }
+
+  if (event.data.type === "image-success") {
+    generateButton?.removeAttribute("disabled");
+    btnText.textContent = "Add to Canvas";
+    loaderEl.classList.toggle("hide");
   }
 });
 

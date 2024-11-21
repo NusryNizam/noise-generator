@@ -1,6 +1,7 @@
 {
   "name": "Noisyy",
   "code": "plugin.js",
+  "icon": "/icon.png",
   "description": "Generate noise inside Penpot",
   "permissions": [
     "content:read",

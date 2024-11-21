@@ -18,17 +18,8 @@ penpot.ui.onMessage<{
     }
   }
 
-  console.log("MESSAGE:", message);
-
   if (message.type === "generate-noise") {
-    penpot
-      .uploadMediaData("noise-data", message.data, "image/jpeg")
-      .then(() => {
-        console.log("done");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    addToCanvas(message.data);
   }
 });
 
@@ -40,3 +31,25 @@ penpot.on("themechange", (theme) => {
     theme,
   });
 });
+
+async function addToCanvas(data: {
+  buffer: Uint8Array;
+  width: number;
+  height: number;
+}) {
+  const image = await penpot.uploadMediaData(
+    "generated-noise",
+    data.buffer,
+    "image/png"
+  );
+
+  if (image) {
+    penpot.ui.sendMessage({ type: "image-success" });
+  }
+
+  const rect = penpot.createRectangle();
+  rect.x = penpot.viewport.center.x;
+  rect.y = penpot.viewport.center.y;
+  rect.resize(data.width, data.height);
+  rect.fills = [{ fillOpacity: 1, fillImage: image }];
+}

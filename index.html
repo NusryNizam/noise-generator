@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
     <title>Noisyy - The noise generator for Penpot</title>
   </head>
   <body>
@@ -59,7 +60,8 @@
         data-handler="generate-noise"
         type="submit"
       >
-        Generate Noise
+        <span id="button-text">Add to Canvas</span>
+        <div class="loader center hide" id="loader"></div>
       </button>
     </div>
 
