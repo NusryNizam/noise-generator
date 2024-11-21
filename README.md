@@ -10,6 +10,7 @@ Available Noise Types:
   - Perlin Noise
   - Gradient Noise
 
+Install here: https://penpot.app/penpothub/plugins/noisyy
 Hosted on Netlify: https://noisyy.netlify.app/
 
 <br>
